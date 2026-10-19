@@ -1,0 +1,150 @@
+@font-face { font-family: 'Pretendard'; src: url(../assets/fonts/PretendardVariable.woff2) format('woff2-variations'); font-weight: 45 920; font-display: block; }
+@font-face { font-family: 'BarlowC'; src: url(../assets/fonts/barlow-condensed-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: block; }
+@font-face { font-family: 'BarlowC'; src: url(../assets/fonts/barlow-condensed-latin-800-normal.woff2) format('woff2'); font-weight: 800; font-display: block; }
+@font-face { font-family: 'BarlowC'; src: url(../assets/fonts/barlow-condensed-latin-900-normal.woff2) format('woff2'); font-weight: 900; font-display: block; }
+@font-face { font-family: 'BarlowC'; src: url(../assets/fonts/barlow-condensed-latin-800-italic.woff2) format('woff2'); font-weight: 800; font-style: italic; font-display: block; }
+@font-face { font-family: 'BarlowC'; src: url(../assets/fonts/barlow-condensed-latin-900-italic.woff2) format('woff2'); font-weight: 900; font-style: italic; font-display: block; }
+@font-face { font-family: 'JBMono'; src: url(../assets/fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'JBMono'; src: url(../assets/fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: block; }
+@font-face { font-family: 'JBMono'; src: url(../assets/fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: block; }
+
+/* 브리프 기본 색: 남색 #061722 · 청록 #11CFD0 · 흰색 #F5F8FA. 결승 강조용 금색을 추가했습니다. */
+:root {
+  --navy: #061722;
+  --navy-2: #0a2433;
+  --navy-3: #0e3044;
+  --teal: #11CFD0;
+  --teal-dim: rgba(17, 207, 208, .55);
+  --white: #F5F8FA;
+  --muted: #8299a8;
+  --gold: #F4C35A;
+  --line: rgba(245, 248, 250, .12);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body.render { background: var(--navy); }
+
+#stage {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden;
+  background: var(--navy); color: var(--white);
+  font-family: 'Pretendard', sans-serif; font-weight: 600;
+  transform-origin: 0 0;
+  -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision;
+  font-feature-settings: 'ss06' 0;
+}
+.layer { position: absolute; inset: 0; }
+.abs { position: absolute; }
+.mono { font-family: 'JBMono', monospace; }
+.bc { font-family: 'BarlowC', 'Pretendard', sans-serif; }
+.teal { color: var(--teal); }
+.gold { color: var(--gold); }
+.muted { color: var(--muted); }
+.nowrap { white-space: nowrap; }
+.mask { overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
+.mask > .in { display: block; will-change: transform; }
+.kr { word-break: keep-all; }
+
+/* ---------- 배경 ---------- */
+#bg { background: radial-gradient(ellipse 70% 80% at 68% 50%, #0d2c3e 0%, #071b28 52%, #04111a 100%); }
+#grid {
+  background-image:
+    linear-gradient(rgba(17, 207, 208, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 207, 208, .055) 1px, transparent 1px);
+  background-size: 96px 96px;
+}
+#bgGlow { background: radial-gradient(circle 520px at 50% 50%, rgba(17, 207, 208, .10), transparent 70%); }
+
+#world { position: absolute; inset: 0; will-change: transform; }
+
+/* ---------- HUD (참고 화면의 머리글/바닥글) ---------- */
+#hud { position: absolute; inset: 0; pointer-events: none; }
+#hudTop { position: absolute; left: 80px; right: 80px; top: 50px; height: 70px; border-bottom: 1px solid var(--line); }
+#hudTop .brand { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 18px; }
+#hudTop .kel { font: 900 40px/1 'BarlowC'; letter-spacing: .02em; }
+#hudTop .sep { width: 2px; height: 30px; background: var(--teal); }
+#hudTop .sub { font: 600 23px/1 'Pretendard'; color: var(--muted); letter-spacing: .02em; }
+#hudTop .sec { position: absolute; right: 0; top: 4px; font: 800 28px/1 'BarlowC'; color: var(--teal); letter-spacing: .08em; }
+#hudBot { position: absolute; left: 80px; right: 80px; top: 1002px; height: 40px; }
+#hudBot .rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--line); }
+#hudBot .bar { position: absolute; left: 0; top: -1px; height: 3px; background: var(--teal); box-shadow: 0 0 12px rgba(17, 207, 208, .6); }
+#hudBot .l { position: absolute; left: 0; top: 22px; font: 500 19px/1 'Pretendard'; color: var(--muted); }
+#hudBot .r { position: absolute; right: 0; top: 21px; font: 700 21px/1 'BarlowC'; color: var(--muted); letter-spacing: .1em; }
+
+/* ---------- 공용 텍스트 ---------- */
+.chip {
+  display: inline-block; padding: 9px 16px 8px; border: 1.5px solid var(--teal-dim);
+  background: rgba(17, 207, 208, .08); color: var(--teal);
+  font: 800 23px/1 'BarlowC'; letter-spacing: .16em;
+}
+.chip.krchip { font: 700 22px/1 'Pretendard'; letter-spacing: .01em; padding: 8px 14px 9px; }
+.chip.gold { border-color: rgba(244, 195, 90, .6); background: rgba(244, 195, 90, .08); color: var(--gold); }
+.h-xl { font-weight: 860; font-size: 128px; line-height: 1.06; letter-spacing: -.035em; }
+.h-l  { font-weight: 840; font-size: 104px; line-height: 1.08; letter-spacing: -.03em; }
+.h-m  { font-weight: 800; font-size: 72px;  line-height: 1.12; letter-spacing: -.025em; }
+.body { font-weight: 600; font-size: 32px; line-height: 1.45; color: #c5d3db; }
+.dot::after { content: '.'; color: var(--teal); }
+.teal.dot::after { color: var(--white); }
+
+/* ---------- 지도 ---------- */
+#mapLayer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+#mapPanel { position: absolute; left: 820px; top: 130px; width: 1040px; height: 860px; overflow: hidden; }
+#mapSvg { position: absolute; left: 0; top: 0; width: 1040px; height: 860px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 140px, #000 calc(100% - 70px), transparent 100%), linear-gradient(180deg, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+  -webkit-mask-composite: source-in; mask-composite: intersect; }
+#mapSvg .prov { fill: #0b2738; stroke: rgba(17, 207, 208, .62); stroke-width: 1.1px; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+#mapSvg .provDots { fill: url(#dotPat); stroke: none; }
+#mapSvg .provGlow { fill: none; stroke: rgba(17, 207, 208, .10); stroke-width: 9px; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+#mapSvg .hl { fill: rgba(17, 207, 208, .28); stroke: var(--teal); stroke-width: 2.6px; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+#pins { position: absolute; left: 0; top: 0; width: 1040px; height: 860px; }
+#leaders { position: absolute; left: 0; top: 0; width: 1040px; height: 860px; overflow: visible; }
+#leaders line, #leaders polyline { stroke: rgba(245, 248, 250, .45); stroke-width: 1.2; fill: none; }
+.pin { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.pin b { position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%; background: var(--white); box-shadow: 0 0 0 3px rgba(6, 23, 34, .7), 0 0 16px rgba(255, 255, 255, .5); }
+.pin i { position: absolute; left: -30px; top: -30px; width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--teal); opacity: 0; }
+.pin.on b { background: var(--teal); box-shadow: 0 0 0 4px rgba(6, 23, 34, .8), 0 0 26px rgba(17, 207, 208, .95); }
+.plabel { position: absolute; left: 0; top: 0; white-space: nowrap; }
+.plabel .pn { font: 760 25px/1.15 'Pretendard'; letter-spacing: -.01em; padding: 3px 8px 2px; background: rgba(6, 23, 34, .72); }
+.plabel .pr { font: 600 17px/1.2 'Pretendard'; color: var(--muted); padding: 0 8px 3px; background: rgba(6, 23, 34, .72); display: inline-block; }
+.plabel.L { text-align: right; }
+.focusLabel { position: absolute; left: 0; top: 0; white-space: nowrap; display: flex; flex-direction: column; align-items: flex-start; }
+.focusLabel .a { font: 800 38px/1 'Pretendard'; letter-spacing: -.02em; padding: 8px 14px 9px; background: rgba(6, 23, 34, .85); border-left: 4px solid var(--teal); display: inline-block; }
+.focusLabel .b { font: 500 18px/1 'JBMono'; color: var(--teal); letter-spacing: .12em; margin-top: 6px; padding: 6px 10px; background: rgba(6, 23, 34, .85); display: inline-block; }
+.reticle { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.reticle svg { position: absolute; overflow: visible; }
+
+/* ---------- 팀 패널 ---------- */
+.teamPanel { position: absolute; left: 120px; top: 190px; width: 700px; }
+.teamPanel .kick { display: flex; align-items: center; gap: 16px; }
+.teamPanel .kick .mono { font-size: 19px; color: var(--muted); letter-spacing: .08em; }
+.teamPanel .num { margin-top: 26px; display: flex; align-items: baseline; gap: 14px; }
+.teamPanel .num .n { font: 900 228px/0.86 'BarlowC'; color: var(--teal); letter-spacing: -.01em; }
+.teamPanel .num .d { font: 800 64px/1 'BarlowC'; color: var(--muted); }
+.teamPanel .name { margin-top: 30px; font-weight: 860; font-size: 92px; line-height: 1.08; letter-spacing: -.035em; word-break: keep-all; }
+.teamPanel .home { margin-top: 26px; display: flex; align-items: center; gap: 16px; font: 650 32px/1 'Pretendard'; color: #c9d6de; }
+.teamPanel .home .lbl { font: 700 20px/1 'Pretendard'; color: var(--teal); border: 1.5px solid var(--teal-dim); padding: 6px 10px; }
+.teamPanel .coord { margin-top: 20px; font: 500 19px/1 'JBMono'; color: var(--muted); letter-spacing: .1em; }
+.teamPanel .logoSlot { position: absolute; right: 30px; top: 90px; width: 150px; height: 150px; border: 2px dashed rgba(245, 248, 250, .3); display: none; align-items: center; justify-content: center; font: 500 16px/1.3 'JBMono'; color: var(--muted); text-align: center; }
+body.placeholders .teamPanel .logoSlot { display: flex; }
+.bigWord { position: absolute; left: 60px; top: 655px; font: 900 italic 330px/1 'BarlowC'; color: transparent; -webkit-text-stroke: 2px rgba(17, 207, 208, .13); white-space: nowrap; letter-spacing: .01em; }
+#teamTicks { position: absolute; left: 120px; top: 935px; display: flex; gap: 6px; align-items: center; }
+#teamTicks i { display: block; width: 26px; height: 6px; background: rgba(245, 248, 250, .14); }
+#teamTicks i.done { background: rgba(17, 207, 208, .55); }
+#teamTicks i.cur { background: var(--teal); box-shadow: 0 0 10px rgba(17, 207, 208, .8); }
+#teamTicks span { margin-left: 14px; font: 500 18px/1 'JBMono'; color: var(--muted); letter-spacing: .1em; }
+
+/* ---------- 효과 ---------- */
+#fx { position: absolute; inset: 0; pointer-events: none; }
+#grain { position: absolute; inset: -128px; opacity: .085; mix-blend-mode: screen; }
+#scanlines { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .16) 0 1px, transparent 1px 3px); opacity: .35; }
+#vignette { position: absolute; inset: 0; background: radial-gradient(ellipse 75% 75% at 50% 50%, transparent 55%, rgba(0, 0, 0, .55) 100%); }
+#flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
+#tint { position: absolute; inset: 0; background: var(--teal); opacity: 0; mix-blend-mode: screen; }
+.wipe { position: absolute; top: 0; height: 1080px; width: 2400px; left: 0; background: linear-gradient(90deg, transparent 0, var(--teal) 8%, var(--teal) 14%, #0b2b3c 14.2%, #0b2b3c 92%, transparent 100%); }
+
+/* ---------- 미리보기 UI ---------- */
+#ui { position: fixed; left: 0; right: 0; bottom: 0; height: 44px; background: rgba(0, 0, 0, .8); color: #ddd; font: 13px/44px 'JBMono', monospace; display: flex; gap: 14px; padding: 0 14px; align-items: center; z-index: 10; }
+#ui button { background: #11CFD0; color: #061722; border: 0; padding: 6px 14px; font-weight: 700; cursor: pointer; }
+#ui input { flex: 1; }
+body.render #ui { display: none; }
+body.nograin #grain, body.nograin #scanlines { display: none; }

@@ -1,0 +1,15 @@
+{
+  "name": "kel-championship-final-promo",
+  "private": true,
+  "type": "module",
+  "description": "2026 KEL 챔피언십 결승전 홍보영상 (이터널 리턴 · 팬메이드) 모션그래픽 소스",
+  "scripts": {
+    "map": "python3 scripts/build_korea_map.py",
+    "audio": "python3 scripts/make_audio.py",
+    "render": "node scripts/render.mjs --workers 3",
+    "preview": "npx serve ."
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

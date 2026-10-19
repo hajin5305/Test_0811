@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KEL Championship Final Promo</title>
+<link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+<!--
+  2026 KEL 챔피언십 결승전 홍보영상 (이터널 리턴) · 1920×1080 · 60fps
+  미리보기: 이 폴더에서 정적 서버를 띄운 뒤 index.html을 여세요. (예: npx serve .)
+  렌더: node scripts/render.mjs  → out/kel_championship_final_promo.mp4
+  ?t=초  특정 시점으로 이동 · ?placeholders=1  팀 로고 자리표시자 표시
+-->
+<div id="stage">
+  <div id="world">
+    <div id="bg" class="layer"></div>
+    <div id="grid" class="layer"></div>
+    <div id="bgGlow" class="layer"></div>
+    <div id="scenes" class="layer"></div>
+  </div>
+  <div id="hud">
+    <div id="hudTop">
+      <div class="brand"><span class="kel">KEL</span><span class="sep"></span><span class="sub">2026 / ETERNAL RETURN</span></div>
+      <div class="sec" id="hudSec"></div>
+    </div>
+    <div id="hudBot">
+      <div class="rule"></div><div class="bar" id="hudBar"></div>
+      <div class="l">대한민국 이스포츠 리그 · 이터널 리턴</div>
+      <div class="r">FAN-MADE / 2026</div>
+    </div>
+  </div>
+  <div id="fx">
+    <div id="wipe" class="wipe"></div>
+    <div id="tint"></div>
+    <div id="grain"></div>
+    <div id="scanlines"></div>
+    <div id="vignette"></div>
+    <div id="flash"></div>
+  </div>
+</div>
+<div id="ui">
+  <button id="play">▶ 재생</button>
+  <span id="time">00:00.00</span>
+  <input id="scrub" type="range" min="0" max="132" step="0.01" value="0">
+</div>
+<audio id="music" src="audio/kel_promo_mix.wav" preload="auto"></audio>
+<script src="src/timeline.js"></script>
+<script src="src/korea_map.js"></script>
+<script src="src/main.js"></script>
+</body>
+</html>
