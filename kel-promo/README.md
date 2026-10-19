@@ -2,8 +2,9 @@
 
 | 항목 | 내용 |
 | --- | --- |
-| 결과물 | `out/kel_championship_final_promo.mp4` |
-| 규격 | 1920 × 1080 · 60fps · 2분 12초(132초, 7,920프레임) · H.264 + AAC 320kbps |
+| 결과물 | `out/kel_championship_final_promo_web.mp4` (54MB, 공유·업로드용, 저장소에 포함) |
+| 마스터 | `out/kel_championship_final_promo.mp4` (557MB, 34Mbps, 렌더 시 생성 · 용량 때문에 저장소 제외) |
+| 규격 | 1920 × 1080 · 60fps · 2분 12초(132초, 7,920프레임) · H.264(BT.709) + AAC 320kbps |
 | 음량 | 약 -14 LUFS, 트루 피크 -1.2 dBTP (유튜브 등 스트리밍 기준) |
 | 판본 | SEASON16 (시즌 참가 16팀 소개) |
 
@@ -89,7 +90,9 @@ scripts/make_audio.py        # 음악과 효과음 → audio/kel_promo_mix.wav
 # 다시 만들기 (Node 18+, Playwright Chromium, ffmpeg, Python3 + numpy/scipy)
 python3 scripts/build_korea_map.py
 python3 scripts/make_audio.py
-node scripts/render.mjs --workers 3          # out/kel_championship_final_promo.mp4
+node scripts/render.mjs --workers 3          # out/kel_championship_final_promo.mp4 (마스터)
+ffmpeg -i out/kel_championship_final_promo.mp4 -vf hqdn3d=0:0:6:6 -c:v libx264 -preset medium -crf 21 \
+  -c:a copy -movflags +faststart out/kel_championship_final_promo_web.mp4   # 공유용
 node scripts/stills.mjs out/stills 8.3 33 98  # 특정 시점 정지 화면 확인
 ```
 
